@@ -67,6 +67,86 @@ main {
 
 }
 
+.modal-box {
+  position: absolute;
+  top:0;
+  left:0;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  // transform: translate3d(100%,0,0);
+  // knock it out of the way initially.
+}
+
 .overlay {
-  display: none;
+  background-color: #000;
+  position: absolute;
+  top:0;
+  left:0;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  opacity: .5;
+
+}
+
+.modal {
+  @extend .card;
+
+  padding: $unit;
+  flex-direction: column;
+  width: 50%;
+  z-index: 1;
+  position: relative;
+  padding-bottom: $unit*2;
+
+  img {
+    margin: $unit 0;
+  }
+
+  div {
+    text-align: center;
+    width: 100%;
+  }
+
+  .adtl {
+    margin-top: $unit;
+    padding-top: $unit;
+    border-top: 1px solid currentColor;
+  }
+
+  .abs {
+    position: absolute;
+    z-index: 1;
+    transition: .5s;
+
+    i:before {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      color: $headings;
+    }
+  }
+
+  .close {
+    top: $unit;
+  }
+
+  .close, .next {
+    right: $unit;
+  }
+
+  .prev, .next {
+    bottom: $unit;
+  }
+
+  .prev {
+    left: $unit;
+  }
+
+
+
 }

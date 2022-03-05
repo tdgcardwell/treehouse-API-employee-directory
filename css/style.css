@@ -26,7 +26,7 @@ main {
   gap: 2rem;
 }
 
-.card {
+.card, .modal {
   background-color: #fff;
   border: 1px solid currentColor;
   border-radius: 5px;
@@ -36,31 +36,103 @@ main {
   transition: .5s;
 }
 
-.card img {
+.card img, .modal img {
   border-radius: 50%;
   aspect-ratio: 1/1;
   margin-right: 1rem;
 }
 
-.card div h2 {
+.card div h2, .modal div h2 {
   margin-bottom: 1rem;
 }
 
-.card div span {
+.card div span, .modal div span {
   display: block;
   margin-bottom: 1rem;
 }
 
-.card div span:last-child {
+.card div span:last-child, .modal div span:last-child {
   margin-bottom: 0;
 }
 
-.card:hover {
+.card:hover, .modal:hover {
   background-color: #fcfcfc;
   border: 1px solid #fff;
   box-shadow: -1px 2px 25px -2px rgba(0, 0, 0, 0.5);
 }
 
+.modal-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
 .overlay {
-  display: none;
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  opacity: .5;
+}
+
+.modal {
+  padding: 2rem;
+  flex-direction: column;
+  width: 50%;
+  z-index: 1;
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+.modal img {
+  margin: 2rem 0;
+}
+
+.modal div {
+  text-align: center;
+  width: 100%;
+}
+
+.modal .adtl {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid currentColor;
+}
+
+.modal .abs {
+  position: absolute;
+  z-index: 1;
+  transition: .5s;
+}
+
+.modal .abs i:before {
+  font-size: 1.5rem;
+}
+
+.modal .abs:hover {
+  color: #454f56;
+}
+
+.modal .close {
+  top: 2rem;
+}
+
+.modal .close, .modal .next {
+  right: 2rem;
+}
+
+.modal .prev, .modal .next {
+  bottom: 2rem;
+}
+
+.modal .prev {
+  left: 2rem;
 }
