@@ -15,9 +15,9 @@ Promise.all([
   fetchData('https://randomuser.me/api/?results=12')
 ])
 .then( data => {
-  randomUsers = data[0];
+  randomUsers = data[0].results;
+  generateCards(randomUsers);
 
-  console.log(randomUsers);
 
 })
 
@@ -27,4 +27,31 @@ function checkStatus(response) {
   } else {
     return Promise.reject(new Error( response.statusText ))
   }
+}
+
+
+// ===================
+//  CARDS
+// ===================
+
+let main = document.querySelector('main');
+
+
+function generateCards(data) {
+  data.forEach(user => {
+
+    console.log(user)
+
+    main.innerHTML += `
+    <div class="card">
+      <img src="${user.picture.large}" alt="">
+      <div class="">
+        <h2>${user.name.first} ${user.name.last}</h2>
+        <span class="email">email@address.com</span>
+        <span class="city">Indianapolis</span>
+      </div>
+    </div>
+    `;
+
+  });
 }
