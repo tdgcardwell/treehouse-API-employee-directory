@@ -18,6 +18,7 @@ Promise.all([
   randomUsers = data[0].results;
   generateCards(randomUsers);
 
+  console.log(randomUsers);
 
 })
 
@@ -35,23 +36,66 @@ function checkStatus(response) {
 // ===================
 
 let main = document.querySelector('main');
+let usercount = 0;
 
 
 function generateCards(data) {
   data.forEach(user => {
 
-    console.log(user)
+    // console.log(user)
 
     main.innerHTML += `
-    <div class="card">
+    <div class="card" id="${usercount}">
       <img src="${user.picture.large}" alt="">
       <div class="">
         <h2>${user.name.first} ${user.name.last}</h2>
-        <span class="email">email@address.com</span>
-        <span class="city">Indianapolis</span>
+        <span class="email">${user.email}</span>
+        <span class="city">${user.location.city}</span>
       </div>
     </div>
     `;
 
+    usercount++;
+
   });
 }
+
+// ===================
+//  INTERACTIONS
+// ===================
+
+let modalBox = $(".modal-box");
+let modal = $(".modal");
+let overlay = $(".overlay");
+
+overlay.click(toggleModal);
+
+function toggleModal() {
+  modalBox.toggleClass("modal-box-on");
+}
+
+
+// ------ modal
+$( "body").on( "click", ".card", function(event) {
+  toggleModal();
+  console.log(event.target.id); //this is how we know which one.
+  modal.html(`
+    <span class="abs close"><i class="fa-solid fa-xmark"></i></span>
+    <span class="abs prev"><i class="fa-solid fa-backward-step"></i></span>
+    <span class="abs next"><i class="fa-solid fa-forward-step"></i></span>
+    <img src="${randomUsers[event.target.id].picture.large}" alt="">
+    <div class="">
+      <h2>${randomUsers[event.target.id].name.first} ${randomUsers[event.target.id].name.last}</h2>
+      <span class="email">${randomUsers[event.target.id].email}</span>
+      <span class="city">${randomUsers[event.target.id].location.city}</span>
+      <div class="adtl">
+        <span class="phone">(317) 599 0000</span>
+        <span class="address">123 Fake St, Apt Q, Fakeville, IN 46200</span>
+        <span class="birthday">Birthday: 01/04/85</span>
+      </div>
+    </div>
+    `);
+  let closeButton = $(".close");
+
+  closeButton.click(toggleModal);
+});
