@@ -19,7 +19,6 @@ Promise.all([
   generateCards(randomUsers);
   cardListeners();
   console.log(randomUsers);
-  insertSearchable();
 
 })
 
@@ -166,13 +165,4 @@ function cardListeners(){
 
     });
   });
-}
-
-
-// ===================
-//  search
-// ===================
-
-function insertSearchable() {
-  
 }

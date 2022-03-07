@@ -1,6 +1,6 @@
 /**
  * @name mySearchBar
- * Searches names (and maybe cities - if I can get that to work) and displays only cards with matching information.
+ * Searches text of each card and displays only cards with matching information.
  * @author Thomas Cardwell
  *
 */
