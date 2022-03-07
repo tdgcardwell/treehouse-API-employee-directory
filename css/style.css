@@ -10,6 +10,16 @@ body {
   font-family: sans-serif;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+#searchbar {
+  padding: 0 2rem;
+}
+
 h1, h2 {
   color: #454f56;
   font-size: 1rem;
