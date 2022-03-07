@@ -74,6 +74,58 @@ function toggleModal() {
   modalBox.toggleClass("modal-box-on");
 }
 
+//New Log
+// newButton.addEventListener('click', (e)=> {
+//
+// });
+
+function replaceModal(i) {
+  // console.log('clicky');
+
+  newID = i;
+
+  dateOfBirth = new Date(randomUsers[newID].dob.date);
+
+  dobMonth = dateOfBirth.getMonth();
+  dobMonth +=1; // fix 0 offset
+  if (dobMonth < 10) {
+    dobMonth = "0" + dobMonth;
+  }
+
+  dobDay = dateOfBirth.getDate();
+  if (dobDay < 10) {
+    dobDay = "0" + dobDay;
+  }
+
+  dobYear = dateOfBirth.getYear();
+
+  modal.html(`
+    <span class="abs close"><i class="fa-solid fa-xmark"></i></span>
+    <span class="abs prev"><i class="fa-solid fa-backward-step"></i></span>
+    <span class="abs next"><i class="fa-solid fa-forward-step"></i></span>
+    <img src="${randomUsers[newID].picture.large}" alt="">
+    <div class="">
+      <h2>${randomUsers[newID].name.first} ${randomUsers[newID].name.last}</h2>
+      <span class="email">${randomUsers[newID].email}</span>
+      <span class="city">${randomUsers[newID].location.city}</span>
+      <div class="adtl">
+        <span class="phone">${randomUsers[newID].phone}</span>
+        <span class="address">${randomUsers[newID].location.street.number} ${randomUsers[newID].location.street.name}, ${randomUsers[newID].location.city}, ${randomUsers[newID].location.state} ${randomUsers[newID].location.postcode}</span>
+        <span class="birthday">Birthday: ${dobMonth} / ${dobDay} / ${dobYear}</span>
+      </div>
+    </div>
+    `);
+    let closeButton = $(".close");
+    closeButton.click(toggleModal);
+
+    let prevButton = $(".prev");
+    let nextButton = $(".next");
+
+    prevButton.addEventListener('click', (e)=> {
+      replaceModal(1);
+    });
+
+}
 
 // ------ modal
 $( "body").on( "click", ".card", function(event) {
@@ -114,6 +166,12 @@ $( "body").on( "click", ".card", function(event) {
     </div>
     `);
   let closeButton = $(".close");
-
   closeButton.click(toggleModal);
+
+  let prevButton = $(".prev");
+  let nextButton = $(".next");
+
+  prevButton.click(replaceModal);
+  nextButton.click(replaceModal);
+
 });
