@@ -83,6 +83,10 @@ function replaceModal(i) {
   // console.log('clicky');
 
   newID = i;
+  previousPerson = i-1;
+  console.log('previous ' + previousPerson);
+  nextPerson = i++ +1;
+  console.log('next ' + nextPerson);
 
   dateOfBirth = new Date(randomUsers[newID].dob.date);
 
@@ -122,11 +126,11 @@ function replaceModal(i) {
     let nextButton = document.querySelector('.next');
 
     prevButton.addEventListener('click', event => {
-      replaceModal(0);
+      replaceModal(previousPerson);
     });
 
     nextButton.addEventListener('click', event => {
-      replaceModal(11);
+      replaceModal(nextPerson);
     });
 
 
