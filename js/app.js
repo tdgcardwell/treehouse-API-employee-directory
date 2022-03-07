@@ -84,8 +84,15 @@ function replaceModal(i) {
 
   newID = i;
   previousPerson = i-1;
+  if (previousPerson < 0) {
+    previousPerson = 11;
+  }
   console.log('previous ' + previousPerson);
+
   nextPerson = i++ +1;
+  if (nextPerson > 11) {
+    nextPerson = 0;
+  }
   console.log('next ' + nextPerson);
 
   dateOfBirth = new Date(randomUsers[newID].dob.date);
