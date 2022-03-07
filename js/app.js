@@ -19,6 +19,7 @@ Promise.all([
   generateCards(randomUsers);
   cardListeners();
   console.log(randomUsers);
+  insertSearchable();
 
 })
 
@@ -115,7 +116,7 @@ function replaceModal(i) {
     <span class="abs prev"><i class="fa-solid fa-backward-step"></i></span>
     <span class="abs next"><i class="fa-solid fa-forward-step"></i></span>
     <img src="${randomUsers[newID].picture.large}" alt="">
-    <div class="">
+    <div class="name">
       <h2>${randomUsers[newID].name.first} ${randomUsers[newID].name.last}</h2>
       <span class="email">${randomUsers[newID].email}</span>
       <span class="city">${randomUsers[newID].location.city}</span>
@@ -165,4 +166,13 @@ function cardListeners(){
 
     });
   });
+}
+
+
+// ===================
+//  search
+// ===================
+
+function insertSearchable() {
+  
 }
