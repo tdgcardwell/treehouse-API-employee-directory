@@ -118,12 +118,19 @@ function replaceModal(i) {
     let closeButton = $(".close");
     closeButton.click(toggleModal);
 
-    let prevButton = $(".prev");
-    let nextButton = $(".next");
+    let prevButton = document.querySelector('.prev');
+    let nextButton = document.querySelector('.next');
 
-    prevButton.addEventListener('click', (e)=> {
-      replaceModal(1);
+    prevButton.addEventListener('click', event => {
+      replaceModal(0);
     });
+
+    nextButton.addEventListener('click', event => {
+      replaceModal(11);
+    });
+
+
+
 
 }
 
@@ -140,7 +147,7 @@ function cardListeners(){
       // currentTarget - this is the useful bit
 
       who = event.currentTarget.id;
-      // console.log(who);
+      console.log(who);
 
       replaceModal(who);
 
