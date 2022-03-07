@@ -78,19 +78,19 @@ function toggleModal() {
 // ------ modal
 $( "body").on( "click", ".card", function(event) {
   toggleModal();
-  console.log(event.target.id); //this is how we know which one.
+  console.log(this.id); //this is how we know which one.
   modal.html(`
     <span class="abs close"><i class="fa-solid fa-xmark"></i></span>
     <span class="abs prev"><i class="fa-solid fa-backward-step"></i></span>
     <span class="abs next"><i class="fa-solid fa-forward-step"></i></span>
-    <img src="${randomUsers[event.target.id].picture.large}" alt="">
+    <img src="${randomUsers[this.id].picture.large}" alt="">
     <div class="">
-      <h2>${randomUsers[event.target.id].name.first} ${randomUsers[event.target.id].name.last}</h2>
-      <span class="email">${randomUsers[event.target.id].email}</span>
-      <span class="city">${randomUsers[event.target.id].location.city}</span>
+      <h2>${randomUsers[this.id].name.first} ${randomUsers[this.id].name.last}</h2>
+      <span class="email">${randomUsers[this.id].email}</span>
+      <span class="city">${randomUsers[this.id].location.city}</span>
       <div class="adtl">
-        <span class="phone">(317) 599 0000</span>
-        <span class="address">123 Fake St, Apt Q, Fakeville, IN 46200</span>
+        <span class="phone">${randomUsers[this.id].phone}</span>
+        <span class="address">${randomUsers[this.id].location.street.number} ${randomUsers[this.id].location.street.name}, ${randomUsers[this.id].location.city}, ${randomUsers[this.id].location.state} ${randomUsers[this.id].location.postcode}</span>
         <span class="birthday">Birthday: 01/04/85</span>
       </div>
     </div>
