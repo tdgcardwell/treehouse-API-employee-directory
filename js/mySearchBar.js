@@ -17,40 +17,29 @@ function cardSearch() {
   // convert to lower case, so that search is not case sensitive
   searchString=searchString.toLowerCase();
 
+  const cards = document.querySelectorAll('.card');
 
   // for each card
+  cards.forEach(card => {
 
-  // get text of card to lower case
+    // get text of card to lower case
 
-  // if searchstring to lowercase is NOT included in card
+    cardText = card.innerText;
 
-  // set card to display none
+    // if searchstring to lowercase is NOT included in card
+    if (!cardText.toLowerCase().includes(searchString)) {
 
-  //else
+    // set card to display none
+    card.style.display="none";
 
-  //display as normal
+    //else
+    } else {
 
+    //display as normal
+    card.style.display="block";
 
-
-
-  // FOR each caption
-  for (i = 0; i < images.length; i++) {
-
-    // IF searchString to lowercase is NOT included within caption
-    if (!images[i].getAttribute('title').toLowerCase().includes(searchString)) {
-
-      // set to display none
-      images[i].style.display="none";
-
-    // ELSE
-    }else {
-
-      // display as normal
-      images[i].style.display="block";
-
-    //ENDIF
-  // ENDFOR
-// end function
     }
-  }
+  });
+
+// end function
 }
