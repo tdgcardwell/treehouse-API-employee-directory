@@ -12,6 +12,16 @@ body {
   font-family: sans-serif;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $unit;
+}
+
+#searchbar {
+  padding: 0 $unit;
+}
+
 h1,h2 {
   color: $headings;
   font-size: 1rem;

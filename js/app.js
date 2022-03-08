@@ -17,7 +17,7 @@ Promise.all([
 .then( data => {
   randomUsers = data[0].results;
   generateCards(randomUsers);
-
+  cardListeners();
   console.log(randomUsers);
 
 })
@@ -74,97 +74,95 @@ function toggleModal() {
   modalBox.toggleClass("modal-box-on");
 }
 
-
-// ------ modal
-
-/*
-
-So, it's not working because if you click any element inside the div, that registers as the target... so it can't read the ID.
-
-tried value, but can't pull the value.
-
-look into bubbling?
-
-*/
-
-
-$( "main").on( "click", ".card", function(e) {
-  console.log($(this).val());
-});
-
-// $( "body").on( "click", ".card", function(event) {
+//New Log
+// newButton.addEventListener('click', (e)=> {
 //
-//   let who = randomUsers[event.target.id]
-//
-//   // let currentUser = event.target.id;
-//   //
-//   // console.log(currentUser);
-//
-//   generateModal(who);
-//   toggleModal();
-//   // console.log(event.target.id);
-//   //this is how we know which one.
-//
-//
-//
-//
-//   // let a = currentUser-1;
-//   // let b = number(currentUser)+1;
-//   // WHY?!?!?!?!
-//
-//
-//
-//   // let prev = $('.prev');
-//   // let next = $('.next')
-//
-//   // prev.click( function(){
-//   //
-//   //   console.log(a);
-//   // });
-//   // next.click( function(){
-//   //
-//   //   console.log(b);
-//   // });
-//
-//
-//
-//   let closeButton = $(".close");
-//
-//   closeButton.click(toggleModal);
 // });
 
+function replaceModal(i) {
+  // console.log('clicky');
 
-function generateModal(who){
-  console.log(who);
-  let dateOfBirth = new Date(who[dob][date]);
+  newID = i;
+  previousPerson = i-1;
+  if (previousPerson < 0) {
+    previousPerson = 11;
+  }
+  console.log('previous ' + previousPerson);
 
-  let day = dateOfBirth.getDate();
-  if (day < 10) {
-    day = "0"+day;
+  nextPerson = i++ +1;
+  if (nextPerson > 11) {
+    nextPerson = 0;
+  }
+  console.log('next ' + nextPerson);
+
+  dateOfBirth = new Date(randomUsers[newID].dob.date);
+
+  dobMonth = dateOfBirth.getMonth();
+  dobMonth +=1; // fix 0 offset
+  if (dobMonth < 10) {
+    dobMonth = "0" + dobMonth;
   }
 
-  let month = dateOfBirth.getMonth();
-  month++; //because of starting at 0
-  if (month < 10) {
-    month = "0"+month;
+  dobDay = dateOfBirth.getDate();
+  if (dobDay < 10) {
+    dobDay = "0" + dobDay;
   }
 
-  let year = dateOfBirth.getYear();
+  dobYear = dateOfBirth.getYear();
 
   modal.html(`
     <span class="abs close"><i class="fa-solid fa-xmark"></i></span>
     <span class="abs prev"><i class="fa-solid fa-backward-step"></i></span>
     <span class="abs next"><i class="fa-solid fa-forward-step"></i></span>
-    <img src="${who.picture.large}" alt="">
-    <div class="">
-      <h2>${who.name.first} ${who.name.last}</h2>
-      <span class="email">${who.email}</span>
-      <span class="city">${who.location.city}</span>
+    <img src="${randomUsers[newID].picture.large}" alt="">
+    <div class="name">
+      <h2>${randomUsers[newID].name.first} ${randomUsers[newID].name.last}</h2>
+      <span class="email">${randomUsers[newID].email}</span>
+      <span class="city">${randomUsers[newID].location.city}</span>
       <div class="adtl">
-        <span class="phone">${who.cell}</span>
-        <span class="address">${who.location.street.number} ${who.location.street.name}, ${who.location.city}, ${who.location.state} ${who.location.postcode}</span>
-        <span class="birthday">Birthday: ${day}/${month}/${year}</span>
+        <span class="phone">${randomUsers[newID].phone}</span>
+        <span class="address">${randomUsers[newID].location.street.number} ${randomUsers[newID].location.street.name}, ${randomUsers[newID].location.city}, ${randomUsers[newID].location.state} ${randomUsers[newID].location.postcode}</span>
+        <span class="birthday">Birthday: ${dobMonth} / ${dobDay} / ${dobYear}</span>
       </div>
     </div>
     `);
+    let closeButton = $(".close");
+    closeButton.click(toggleModal);
+
+    let prevButton = document.querySelector('.prev');
+    let nextButton = document.querySelector('.next');
+
+    prevButton.addEventListener('click', event => {
+      replaceModal(previousPerson);
+    });
+
+    nextButton.addEventListener('click', event => {
+      replaceModal(nextPerson);
+    });
+
+
+
+
+}
+
+// ------ modal
+
+function cardListeners(){
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach(card => {
+    card.addEventListener('click', event => {
+      toggleModal();
+
+      // console.log(event.currentTarget.id);
+      // currentTarget - this is the useful bit
+
+      who = event.currentTarget.id;
+      console.log(who);
+
+      replaceModal(who);
+
+
+    });
+  });
 }
